@@ -272,10 +272,30 @@ export const WarrantyCertificateForm: React.FC<WarrantyCertificateFormProps> = (
         {openSections.orderDetails && (
           <div className="p-5 space-y-4">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {/* Date */}
+              <div>
+                <label className="block text-xs font-semibold text-slate-700 mb-1">
+                  Date
+                </label>
+                <input
+                  type="date"
+                  value={data.date ?? data.certificateDate ?? ""}
+                  onChange={(e) => {
+                    const val = e.target.value;
+                    onChange({
+                      ...data,
+                      date: val,
+                      certificateDate: val,
+                    });
+                  }}
+                  className="w-full text-xs sm:text-sm border border-slate-300 rounded-xl px-3 py-2 outline-none focus:ring-2 focus:ring-[#FF2D01] bg-white"
+                />
+              </div>
+
               {/* Customer */}
               <div className="sm:col-span-2">
                 <label className="block text-xs font-semibold text-slate-700 mb-1">
-                  Customer <span className="text-red-500">*</span>
+                  Customer Name <span className="text-red-500">*</span>
                 </label>
                 <input
                   type="text"
@@ -329,22 +349,6 @@ export const WarrantyCertificateForm: React.FC<WarrantyCertificateFormProps> = (
                 />
               </div>
 
-              {/* Product Description */}
-              <div className="sm:col-span-2">
-                <label className="block text-xs font-semibold text-slate-700 mb-1">
-                  Product Description
-                </label>
-                <input
-                  type="text"
-                  value={data.productDescription ?? ""}
-                  onChange={(e) =>
-                    handleFieldChange("productDescription", e.target.value)
-                  }
-                  placeholder="e.g. Please refer above Sales Order"
-                  className="w-full text-xs sm:text-sm border border-slate-300 rounded-xl px-3 py-2 outline-none focus:ring-2 focus:ring-[#FF2D01] bg-white"
-                />
-              </div>
-
               {/* Customer PO Date */}
               <div>
                 <label className="block text-xs font-semibold text-slate-700 mb-1">
@@ -358,22 +362,18 @@ export const WarrantyCertificateForm: React.FC<WarrantyCertificateFormProps> = (
                 />
               </div>
 
-              {/* Certificate Date */}
-              <div>
+              {/* Product Description */}
+              <div className="sm:col-span-2">
                 <label className="block text-xs font-semibold text-slate-700 mb-1">
-                  Certificate Date
+                  Product Description
                 </label>
                 <input
-                  type="date"
-                  value={data.date ?? data.certificateDate ?? ""}
-                  onChange={(e) => {
-                    const val = e.target.value;
-                    onChange({
-                      ...data,
-                      date: val,
-                      certificateDate: val,
-                    });
-                  }}
+                  type="text"
+                  value={data.productDescription ?? ""}
+                  onChange={(e) =>
+                    handleFieldChange("productDescription", e.target.value)
+                  }
+                  placeholder="e.g. Please refer above Sales Order"
                   className="w-full text-xs sm:text-sm border border-slate-300 rounded-xl px-3 py-2 outline-none focus:ring-2 focus:ring-[#FF2D01] bg-white"
                 />
               </div>

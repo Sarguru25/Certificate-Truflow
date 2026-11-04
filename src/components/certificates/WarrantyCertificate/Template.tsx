@@ -6,6 +6,7 @@ import {
   WarrantyCertificateItem,
   CustomField,
 } from "@/types/certificate";
+import { formatDisplayDate } from "@/lib/certificateDefaults";
 
 interface WarrantyCertificateTemplateProps {
   data: WarrantyCertificateData;
@@ -29,6 +30,8 @@ export const WarrantyCertificateTemplate: React.FC<WarrantyCertificateTemplatePr
   const generalCustom: CustomField[] = data.customFields?.general || [];
   const productCustom: CustomField[] = data.customFields?.product || [];
 
+  const rawDate = data.date || data.certificateDate || "";
+  const date = rawDate ? formatDisplayDate(rawDate) : "";
   const customerName = data.customerName ?? "ABC Private Limited";
   const salesOrderNo = data.salesOrderNo ?? "510";
   const poNumber = data.customerPO ?? "P000900";
@@ -125,6 +128,11 @@ export const WarrantyCertificateTemplate: React.FC<WarrantyCertificateTemplatePr
         <div className="text-[15px] text-black mb-10 leading-relaxed">
           <table className="border-collapse">
             <tbody>
+              <tr>
+                <td className="font-bold whitespace-nowrap pr-2 py-0.5 align-top">Date</td>
+                <td className="font-bold px-2 py-0.5 align-top text-center">:</td>
+                <td className="text-black py-0.5 align-top">{date}</td>
+              </tr>
               <tr>
                 <td className="font-bold whitespace-nowrap pr-2 py-0.5 align-top">Customer Name</td>
                 <td className="font-bold px-2 py-0.5 align-top text-center">:</td>
